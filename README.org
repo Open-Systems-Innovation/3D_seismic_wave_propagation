@@ -1,0 +1,2 @@
+#+TITLE: 3D Seismic Wave Propagation
+This repo contains the source code for a Finite Element simulation for calculating the propagation of seismic waves, and the accompanies Nix development environment via ~flake.nix~.

@@ -1,5 +1,5 @@
-{
-  description = "Dev environment for 3D seismic wave propogation";
+  {
+  description = "3D Seismic Wave Propogation Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -23,7 +23,6 @@
               # pkgs.hello-nix
                pkgs.petsc
                pkgs.mpich
-               pkgs.clang-tools
               #  # Python packages
               #(pkgs.python3.withPackages (python-pkgs: [
               #  # packages for formatting/ IDE
@@ -41,8 +40,8 @@
             PETSC_DIR = "${pkgs.petsc}";
 
             shellHook = ''
-              export ENVIRONMENT_NAME="3D Seismic Wave Propogation"
-              export PS1="┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]][\$ENVIRONMENT_NAME]\n└─╼"
+              export ENVIRONMENT_NAME="Custom Environment"
+              export PS1="┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]][$ENVIRONMENT_NAME]\n└─╼"
             '';
           };
         };

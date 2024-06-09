@@ -24,3 +24,14 @@ Therefore, the simplest way of running the ~main.c~ file in this repository is:
 #+BEGIN_SRC bash
 mpiexec -n 2 ./main
 #+END_SRC
+
+In this simulation, on line 85-88 we have checked if the user has provided the value of ~dim~ , ~dt~, ~nsteps~, and ~dump_output~, where:
+- ~dim~ is the dimension of the problem
+- ~dt~ is the size of the time-steps
+- ~nsteps~ is the number of time-steps
+- ~dump_output~ is a boolean operator which specifies if the program should dump the output to stdout. 
+That means we can supply this value at runtime as follows:
+#+BEGIN_SRC bash
+mpiexec -n 1 ./main -n 100
+#+END_SRC
+This will override the default value of ~n = 10~ and run the simulation with ~n = 100~ 

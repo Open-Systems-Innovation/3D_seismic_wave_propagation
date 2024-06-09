@@ -15,3 +15,12 @@ make main
 #+END_SRC
 Which will compile the ~main.c~ file and link the appropriate PETSc libraries
 
+* How to run the simulation
+This is a multi-processor example. In general we could run a ~PETSc~ progam as follows:
+#+BEGIN_SRC bash
+mpiexec -n 8 ./petsc_program_name petsc_options
+#+END_SRC
+Therefore, the simplest way of running the ~main.c~ file in this repository is:
+#+BEGIN_SRC bash
+mpiexec -n 2 ./main
+#+END_SRC

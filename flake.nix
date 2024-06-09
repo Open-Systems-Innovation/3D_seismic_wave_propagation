@@ -1,4 +1,4 @@
-  {
+{
   description = "3D Seismic Wave Propogation Environment";
 
   inputs = {

@@ -1,2 +1,17 @@
 #+TITLE: 3D Seismic Wave Propagation
 This repo contains the source code for a Finite Element simulation for calculating the propagation of seismic waves, and the accompanies Nix development environment via ~flake.nix~.
+
+* How to Compile the simulation
+Included in this directory is a makefile. This make file is about as simple as possible for a PETSc document and is reproduced in its entirety below:
+#+BEGIN_SRC make
+include ${PETSC_DIR}/lib/petsc/conf/variables
+include ${PETSC_DIR}/lib/petsc/conf/rules
+#+END_SRC
+This uses the users installation of ~PETSC_DIR~ to include some standard variables and build targets for a PETSC application. Alternatively we could specify each included library in our makefile.
+
+To compile all we need to do is:
+#+BEGIN_SRC bash
+make main
+#+END_SRC
+Which will compile the ~main.c~ file and link the appropriate PETSc libraries
+

@@ -209,7 +209,6 @@ int main(int argc, char *argv[])
       PetscCall(DumpStress(&ctx, stress, timestep));
     }
   }
-
   /* Clean up and finalize PETSc */
   PetscCall(VecDestroy(&velocity));
   PetscCall(VecDestroy(&stress));

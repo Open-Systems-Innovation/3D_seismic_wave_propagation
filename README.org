@@ -35,3 +35,6 @@ That means we can supply this value at runtime as follows:
 mpiexec -n 1 ./main -n 100
 #+END_SRC
 This will override the default value of ~n = 10~ and run the simulation with ~n = 100~ 
+
+* How to visualize the solution
+To visualize the solution we can use the ~PETSc~ capability to output to a ~VTK~ file.

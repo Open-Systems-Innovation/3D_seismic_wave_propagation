@@ -23,6 +23,7 @@
               # pkgs.hello-nix
                pkgs.petsc
                pkgs.mpich
+               pkgs.bear
               #  # Python packages
               #(pkgs.python3.withPackages (python-pkgs: [
               #  # packages for formatting/ IDE

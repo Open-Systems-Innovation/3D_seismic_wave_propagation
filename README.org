@@ -1,5 +1,5 @@
 #+TITLE: 3D Seismic Wave Propagation
-This repo contains the source code for a Finite Element simulation for calculating the propagation of seismic waves, and the accompanies Nix development environment via ~flake.nix~.
+This repo contains the source code for a Finite Difference Method (FDM) simulation for calculating the propagation of seismic waves. Inlcuded is a Nix development environment via ~flake.nix~ suitable for running and developing the program.
 
 * How to Compile the simulation
 Included in this directory is a makefile. This make file is about as simple as possible for a PETSc document and is reproduced in its entirety below:
@@ -38,3 +38,10 @@ This will override the default value of ~n = 10~ and run the simulation with ~n 
 
 * How to visualize the solution
 To visualize the solution we can use the ~PETSc~ capability to output to a ~VTK~ file.
+
+* Understanding the math
+This program is based on the 1986 paper called[[https://doi.org/10.1190/1.1442147][ /P-SV Wave Propagation in Heterogeneous Media: Velocity-Stress Finite-Difference Method/ ]] by Jean Virieux. This paper presents a FDM algorithm for modeling P-SV (Primary waves - Shear Waves) wave propagation in heterogenous media.
+
+This particular method includes velocity and stress in the equations of motion.
+
+Since we are using a FDM aproach, were going to need a structured grid. We will use the ~DMSTAG~ object from ~PETSc~.

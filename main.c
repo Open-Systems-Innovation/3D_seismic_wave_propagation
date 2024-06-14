@@ -8,7 +8,7 @@ static const char help[] = "Simple 2D or 3D finite difference seismic wave propa
 /*
 Reference:
 
-@article{Virieux1986,
+@article{virieux1986,
   title     = {{P-SV} Wave Propagation in Heterogeneous Media: {V}elocity-Stress Finite-Difference Method},
   author    = {Virieux, Jean},
   journal   = {Geophysics},
@@ -92,13 +92,19 @@ int main(int argc, char *argv[])
     PetscInt       dof0, dof1, dof2, dof3;
     const PetscInt stencilWidth = 1;
 
+    /*
+      The following switch statment set the number of degrees of freedom per
+      cell boundary based on the problems dimension, ctx.dim (2 or 3)
+      */
     switch (ctx.dim) {
+      // the 2D case
     case 2:
       dof0 = 0;
       dof1 = 1;
       dof2 = 0; /* 1 dof per cell boundary */
       PetscCall(DMStagCreate2d(PETSC_COMM_WORLD, DM_BOUNDARY_NONE, DM_BOUNDARY_NONE, 100, 100, PETSC_DECIDE, PETSC_DECIDE, dof0, dof1, dof2, DMSTAG_STENCIL_BOX, stencilWidth, NULL, NULL, &ctx.dm_velocity));
       break;
+      // the 3D case
     case 3:
       dof0 = 0;
       dof1 = 0;

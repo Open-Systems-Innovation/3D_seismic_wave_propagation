@@ -24,6 +24,7 @@
                pkgs.petsc
                pkgs.mpich
                pkgs.bear
+               pkgs.pkg-config-unwrapped
               #  # Python packages
               #(pkgs.python3.withPackages (python-pkgs: [
               #  # packages for formatting/ IDE

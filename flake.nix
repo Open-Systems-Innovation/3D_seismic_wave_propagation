@@ -23,8 +23,8 @@
               # pkgs.hello-nix
                pkgs.petsc
                pkgs.mpich
-               pkgs.bear
-               pkgs.pkg-config-unwrapped
+              # pkgs.bear
+              # pkgs.pkg-config-unwrapped
               #  # Python packages
               #(pkgs.python3.withPackages (python-pkgs: [
               #  # packages for formatting/ IDE
@@ -42,7 +42,9 @@
             PETSC_DIR = "${pkgs.petsc}";
 
             shellHook = ''
-              find $PETSC_DIR/src =name '*.c' | etags -
+              if [ ! -f "TAGS" ]; then
+                  find $PETSC_DIR/src -name '*.c' | etags -
+              fi
               export ENVIRONMENT_NAME="Custom Environment"
               export PS1="┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]][$ENVIRONMENT_NAME]\n└─╼"
             '';

@@ -36,7 +36,7 @@ stress there).
 #include <petscdmstag.h>
 #include <petscts.h>
 
-/* A struct defining the parameters of the problem */
+/* A struct defining the context parameters of the problem */
 typedef struct {
   DM          dm_velocity, dm_stress;
   DM          dm_buoyancy, dm_lame;
@@ -49,7 +49,7 @@ typedef struct {
   PetscBool   dump_output;
 } Ctx;
 
-static PetscErrorCode CreateLame(Ctx *);
+static PetscErrorCode CreateLame(Ctx *);  // initializes the Lamé parameters
 static PetscErrorCode ForceStress(const Ctx *, Vec, PetscReal);
 static PetscErrorCode DumpVelocity(const Ctx *, Vec, PetscInt);
 static PetscErrorCode DumpStress(const Ctx *, Vec, PetscInt);
@@ -167,12 +167,13 @@ int main(int argc, char *argv[])
 
   /* Print out some info */
   {
-    PetscInt    N[3];
-    PetscScalar dx, Vp;
+    PetscInt    N[3]; // place holder for grid degrees of freedome (dof)
+    PetscScalar dx, Vp; // space between x grid points, Primary wave (P-wave) velocity
 
     PetscCall(DMStagGetGlobalSizes(ctx.dm_velocity, &N[0], &N[1], &N[2]));
     dx = (ctx.xmax - ctx.xmin) / N[0];
     Vp = PetscSqrtScalar((ctx.lambda + 2 * ctx.mu) / ctx.rho);
+
     if (ctx.dim == 2) {
       PetscCall(PetscPrintf(PETSC_COMM_WORLD, "Using a %" PetscInt_FMT " x %" PetscInt_FMT " mesh\n", N[0], N[1]));
     } else if (ctx.dim == 3) {
@@ -185,7 +186,7 @@ int main(int argc, char *argv[])
   }
 
   /* Populate the coefficient arrays */
-  PetscCall(CreateLame(&ctx));
+  PetscCall(CreateLame(&ctx)); // initialize the Lamé parameters
   PetscCall(DMCreateGlobalVector(ctx.dm_buoyancy, &ctx.buoyancy));
   PetscCall(VecSet(ctx.buoyancy, 1.0 / ctx.rho));
 
@@ -228,6 +229,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
+// initialize the Lamé parameters
 static PetscErrorCode CreateLame(Ctx *ctx)
 {
   PetscInt N[3], ex, ey, ez, startx, starty, startz, nx, ny, nz, extrax, extray, extraz;
@@ -327,6 +329,7 @@ static PetscErrorCode CreateLame(Ctx *ctx)
   PetscFunctionReturn(PETSC_SUCCESS);
 }
 
+// apply a time-dependent force to the stress field at a specific location within a domain
 static PetscErrorCode ForceStress(const Ctx *ctx, Vec stress, PetscReal t)
 {
   PetscInt          start[3], n[3], N[3];

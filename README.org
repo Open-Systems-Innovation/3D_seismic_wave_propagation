@@ -37,7 +37,7 @@ mpiexec -n 1 ./main -n 100
 This will override the default value of ~n = 10~ and run the simulation with ~n = 100~ 
 
 * How to visualize the solution
-To visualize the solution we can use the ~PETSc~ capability to output to a ~VTK~ file.
+To visualize the solution we can use the ~PETSc~ capability to output to a ~VTK~ file. We can then use Paraview to create a 3D plot of each timestep.
 
 * Understanding the math
 This program is based on the 1986 paper called[[https://doi.org/10.1190/1.1442147][ /P-SV Wave Propagation in Heterogeneous Media: Velocity-Stress Finite-Difference Method/ ]] by Jean Virieux. This paper presents a FDM algorithm for modeling P-SV (Primary waves - Shear Waves) wave propagation in heterogenous media.
